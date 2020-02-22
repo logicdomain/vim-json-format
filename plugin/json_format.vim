@@ -5,8 +5,8 @@ let g:loaded_json_format = 1
 
 function! json_format#parse(mode)
     let dictCmd = {"v":"'<,'>", "l":line("."), "n":"%"}
-    
-    silent execute ":"dictCmd[a:mode]"!python -c '
+
+    silent execute ":"dictCmd[a:mode]"!python2 -c '
         \import json,sys;
         \reload(sys);
         \sys.setdefaultencoding(\"utf-8\");
@@ -17,8 +17,10 @@ function! json_format#parse(mode)
 endfunction
 
 " Format Line Under Cursor
-map <leader>js :call json_format#parse("l")<cr>
+" map <leader>js :call json_format#parse("l")<cr>
 " Format Visual Selection
-vmap <leader>js :call json_format#parse("v")<cr>
+" vmap <leader>js :call json_format#parse("v")<cr>
 " Format Entire Buffer
-nmap <leader>jsf :call json_format#parse("n")<cr>
+" nmap <leader>jsf :call json_format#parse("n")<cr>
+command! JsonFormat :call json_format#parse("n")<cr>
+
